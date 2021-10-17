@@ -9,6 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Woofy">
+
+        <activity
+            android:name=".LandingPage"
+            android:exported="true" />
+
+        <activity
+            android:name=".QuestionPage"
+            android:exported="true" />
+
+        <activity
+            android:name=".ResultPage"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

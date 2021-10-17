@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".QuestionPage">
+
+    <!--Banner-->
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_blue"
+        android:gravity="center"
+        android:text="Woof"
+        android:paddingVertical="15sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Main Content-->
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50sp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/banner"
+        app:layout_constraintVertical_bias="0.278">
+
+
+        <!--Previous Button-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/previous"
+            android:layout_width="55dp"
+            android:layout_height="20sp"
+            android:layout_gravity="left"
+            android:background="#0000"
+            android:gravity="center_vertical|left"
+            android:text="previous"
+            android:textColor="@color/gray"
+            android:textSize="10dp" />
+
+
+        <!--Question Counter-->
+        <TextView
+            android:id="@+id/quetionCounter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:text="quetion"
+            android:textColor="@color/main_blue" />
+
+
+        <!--Question-->
+        <TextView
+            android:id="@+id/textQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="150sp"
+            android:gravity="center|bottom"
+            android:paddingBottom="15sp"
+            android:text="TextView"
+            android:textColor="@color/main_blue" />
+
+        <!--Dotted Line-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginBottom="30sp"
+            android:layerType="software"
+            android:paddingHorizontal="40sp"
+            android:src="@drawable/dotted" />
+
+
+        <!--Answer-->
+        <RadioGroup
+            android:id="@+id/radioButtonGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="40sp">
+
+            <!--Answer1-->
+            <RadioButton
+                android:id="@+id/radioItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/main_blue"
+                android:text="RadioButton"
+                android:textColor="@color/main_blue" />
+
+            <!--Answer2-->
+            <RadioButton
+                android:id="@+id/radioItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/main_blue"
+                android:text="RadioButton"
+                android:textColor="@color/main_blue" />
+
+            <!--Answer3-->
+            <RadioButton
+                android:id="@+id/radioItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/main_blue"
+                android:text="RadioButton"
+                android:textColor="@color/main_blue" />
+
+            <!--Answer4-->
+            <RadioButton
+                android:id="@+id/radioItem4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/main_blue"
+                android:text="RadioButton"
+                android:textColor="@color/main_blue" />
+            </RadioGroup>
+
+
+            <!--Next Button-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/next"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="90sp"
+                android:layout_height="40sp"
+                android:layout_gravity="center"
+                android:layout_margin="10sp"
+                android:background="@drawable/my_button_bg"
+                android:text="next"
+                android:textColor="@color/main_blue" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

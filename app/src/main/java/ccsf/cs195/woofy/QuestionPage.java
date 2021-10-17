@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -16,11 +14,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity {
+public class QuestionPage extends AppCompatActivity {
 
     private static String dbpath = "/data/data/ccsf.cs195.woofy/databases/woofy.db";
     SQLiteDatabase db;
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_question_page);
 
         TextView txtQuestion =
                 (TextView) findViewById(R.id.textQuestion);

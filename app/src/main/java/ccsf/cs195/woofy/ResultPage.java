@@ -1,26 +1,21 @@
 package ccsf.cs195.woofy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity {
+public class ResultPage extends AppCompatActivity {
 
     private static String dbpath = "/data/data/ccsf.cs195.woofy/databases/woofy.db";
     SQLiteDatabase db;
@@ -32,22 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        TextView txtQuestion =
-                (TextView) findViewById(R.id.textQuestion);
-
-        RadioButton radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
-        RadioButton radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
-        RadioButton radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
-        RadioButton radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
-        initDatabase(this);
-        String[] databaseReturn = getDatabase(questionTable,intQuestionRow,"Number","2");
-        txtQuestion.setText(databaseReturn[1]);
-        radioItem1.setText(databaseReturn[2]);
-        radioItem2.setText(databaseReturn[3]);
-        radioItem3.setText(databaseReturn[4]);
-        radioItem4.setText(databaseReturn[5]);
+        setContentView(R.layout.activity_result_page);
     }
 
     public void openDatabase() {

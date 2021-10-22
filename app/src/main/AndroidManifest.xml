@@ -12,7 +12,15 @@
 
         <activity
             android:name=".LandingPage"
-            android:exported="true" />
+            android:exported="true">
+
+            <!-- intent-filter added to launch application on LandingPage -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".QuestionPage"
@@ -24,11 +32,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
+            <!--
+            Removed to prevent starting on this activity
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
         </activity>
     </application>
 

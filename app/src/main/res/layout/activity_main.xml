@@ -22,25 +22,25 @@
             android:text="TextView" />
 
         <RadioButton
-            android:id="@+id/radioItem1"
+            android:id="@+id/radio_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
 
         <RadioButton
-            android:id="@+id/radioItem2"
+            android:id="@+id/radio_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
 
         <RadioButton
-            android:id="@+id/radioItem3"
+            android:id="@+id/radio_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
 
         <RadioButton
-            android:id="@+id/radioItem4"
+            android:id="@+id/radio_four"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RadioButton" />

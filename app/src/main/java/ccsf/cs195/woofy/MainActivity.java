@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -16,8 +14,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         TextView txtQuestion =
                 (TextView) findViewById(R.id.textQuestion);
 
-        RadioButton radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
-        RadioButton radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
-        RadioButton radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
-        RadioButton radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
+        RadioButton radioItem1 = (RadioButton) findViewById(R.id.radio_one);
+        RadioButton radioItem2 = (RadioButton) findViewById(R.id.radio_two);
+        RadioButton radioItem3 = (RadioButton) findViewById(R.id.radio_three);
+        RadioButton radioItem4 = (RadioButton) findViewById(R.id.radio_four);
         initDatabase(this);
         String[] databaseReturn = getDatabase(questionTable,intQuestionRow,"Number","2");
         txtQuestion.setText(databaseReturn[1]);

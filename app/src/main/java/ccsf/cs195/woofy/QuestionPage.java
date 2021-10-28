@@ -3,12 +3,17 @@ package ccsf.cs195.woofy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,26 +29,99 @@ public class QuestionPage extends AppCompatActivity {
     private static final int intDogTableRow = 7;
     private static final  String dogTable = "DogTable";
 
+    private RadioButton radioItem1;
+    private RadioButton radioItem2;
+    private RadioButton radioItem3;
+    private RadioButton radioItem4;
+    private RadioGroup radioItemGroup;
+    private Button nextQuestionButton;
+
+    TextView txtQuestion;
+    TextView txtCounter;
+
+    private int questionCounter = 1;
+    private int questionTotal = 0;
+
+    /*
+    This needs to be cleaned up with a new class, then implementation needs to be tinkered with
+    private int amountOfMotion;
+    private int shedLevel;
+    private int woofLevel;
+    private int salivaLevel;
+    private int selectedId;
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_page);
 
-        TextView txtQuestion =
-                (TextView) findViewById(R.id.textQuestion);
+        txtQuestion = findViewById(R.id.textQuestion);
+        txtCounter = findViewById(R.id.questionCounter);
 
-        RadioButton radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
-        RadioButton radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
-        RadioButton radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
-        RadioButton radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
+        radioItemGroup = (RadioGroup) findViewById(R.id.radioButtonGroup);
+        radioItem1 = (RadioButton) findViewById(R.id.radio_one);
+        radioItem2 = (RadioButton) findViewById(R.id.radio_two);
+        radioItem3 = (RadioButton) findViewById(R.id.radio_three);
+        radioItem4 = (RadioButton) findViewById(R.id.radio_four);
         initDatabase(this);
-        String[] databaseReturn = getDatabase(questionTable,intQuestionRow,"Number","2");
-        txtQuestion.setText(databaseReturn[1]);
-        radioItem1.setText(databaseReturn[2]);
-        radioItem2.setText(databaseReturn[3]);
-        radioItem3.setText(databaseReturn[4]);
-        radioItem4.setText(databaseReturn[5]);
+
+        // Modified Search Key tied to number counter - test - Was "2"
+        setButtons(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
+
+        nextQuestionButton = (Button) findViewById(R.id.next_button);
+        nextQuestionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                //Possible start - Retrieve id of button selected - Not getting too ahead
+                /*
+                int selectedId = radioItemGroup.getCheckedRadioButtonId();
+                Toast.makeText(getBaseContext(), String.valueOf(selectedId), Toast.LENGTH_LONG).show();
+                 */
+
+
+                questionCounter++;
+                setButtons(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
+            }
+        });
     }
+
+    public void setButtons(String table, int row, String key, String place) {
+        String[] databaseReturn = getDatabase(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
+
+        if (questionCounter > questionTotal) {
+            Intent intent = new Intent(QuestionPage.this, ResultPage.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+            // Need to pass data to new Activity prior to finish() executing
+            finish();
+        } else {
+            // Pending refinement of database
+            //setPoints(databaseReturn, selectedId);
+
+            radioItemGroup.clearCheck();
+            txtCounter.setText(String.valueOf(questionCounter) + "/" + questionTotal);
+            txtQuestion.setText(databaseReturn[1]);
+            radioItem1.setText(databaseReturn[2]);
+            radioItem2.setText(databaseReturn[3]);
+            radioItem3.setText(databaseReturn[4]);
+            radioItem4.setText(databaseReturn[5]);
+        }
+    }
+
+    /*
+    Method could be used to tally up total for global variables used for result.
+    public void setPoints(String[] data, int id) {
+        amountOfMotion += Integer.parseInt(data[id]);
+        shedLevel += Integer.parseInt(data[id + 1]);
+        woofLevel += Integer.parseInt(data[id + 2]);
+        salivaLevel += Integer.parseInt(data[id + 3]);
+    }
+    */
+
 
     public void openDatabase() {
         db = SQLiteDatabase.openOrCreateDatabase(dbpath, null);
@@ -91,12 +169,15 @@ public class QuestionPage extends AppCompatActivity {
         String[] tempString = new String[databaseRow];
         Cursor cursor;
 
+        // Separate query to retrieve current question count - Count total number of rows
+        Cursor countCursor = db.rawQuery("SELECT * FROM " + tableName, null);
+        questionTotal = countCursor.getCount();
 
         cursor = db.rawQuery("select * from "+ tableName +
                 " where " + searchKey +" =? ;", new String[]{String.valueOf(number)});
 
-
-        if (cursor.getCount() != 0) {
+        // Modified to use variable that performed query already
+        if (questionTotal != 0) {
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
                 for (int i = 0; i < databaseRow; i++) {

@@ -5,4 +5,5 @@
     <string name="button_begin">Begin</string>
     <string name="question_main">PLACEHOLDER FOR DATABASE PULLS</string>
     <string name="question_counter">PLACEHOLDER FOR COUNTER</string>
+    <string name="button_previous">Previous</string>
 </resources>

@@ -34,7 +34,6 @@ public class QuestionPage extends AppCompatActivity {
     private RadioButton radioItem3;
     private RadioButton radioItem4;
     private RadioGroup radioItemGroup;
-    private Button nextQuestionButton;
 
     TextView txtQuestion;
     TextView txtCounter;
@@ -66,10 +65,25 @@ public class QuestionPage extends AppCompatActivity {
         radioItem4 = (RadioButton) findViewById(R.id.radio_four);
         initDatabase(this);
 
-        // Modified Search Key tied to number counter - test - Was "2"
-        setButtons(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
+        // Function to set Question and Responses
+        setButtons();
 
-        nextQuestionButton = (Button) findViewById(R.id.next_button);
+        Button previousQuestionButton = (Button) findViewById(R.id.previous_button);
+        previousQuestionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (questionCounter == 1) {
+                    Toast.makeText(getBaseContext(), "You're already at the first question!", Toast.LENGTH_SHORT).show();
+                } else {
+                    questionCounter--;
+                    setButtons();
+                }
+            }
+        });
+
+        Button nextQuestionButton = (Button) findViewById(R.id.next_button);
         nextQuestionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -81,14 +95,17 @@ public class QuestionPage extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), String.valueOf(selectedId), Toast.LENGTH_LONG).show();
                  */
 
-
-                questionCounter++;
-                setButtons(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
+                if (radioItemGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getBaseContext(), "You need to select an option to continue!", Toast.LENGTH_SHORT).show();
+                } else {
+                    questionCounter++;
+                    setButtons();
+                }
             }
         });
     }
 
-    public void setButtons(String table, int row, String key, String place) {
+    public void setButtons() {
         String[] databaseReturn = getDatabase(questionTable, intQuestionRow, "Number", String.valueOf(questionCounter));
 
         if (questionCounter > questionTotal) {
@@ -96,14 +113,14 @@ public class QuestionPage extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
-            // Need to pass data to new Activity prior to finish() executing
+            // Need to pass data to new Activity prior to finish() executing - What to pass?
             finish();
         } else {
             // Pending refinement of database
             //setPoints(databaseReturn, selectedId);
 
             radioItemGroup.clearCheck();
-            txtCounter.setText(String.valueOf(questionCounter) + "/" + questionTotal);
+            txtCounter.setText(questionCounter + "/" + questionTotal);
             txtQuestion.setText(databaseReturn[1]);
             radioItem1.setText(databaseReturn[2]);
             radioItem2.setText(databaseReturn[3]);

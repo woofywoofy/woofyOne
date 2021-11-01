@@ -12,39 +12,39 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/main_blue"
         android:textSize="45sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/quote"
+        android:id="@+id/intro_quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:lineSpacingExtra="5sp"
+        android:paddingHorizontal="60sp"
         android:paddingTop="80sp"
         android:paddingBottom="30sp"
-        android:layout_gravity="center"
-        android:paddingHorizontal="60sp"
         android:text="@string/quote"
         android:textAlignment="center"
         android:textColor="@color/main_blue"
-/>
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-
-        android:id="@+id/begin"
+        android:id="@+id/button_begin"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin"
-        android:textColor="@color/main_blue"
         android:background="@drawable/my_button_bg"
-        android:onClick="onClick"
-        style="?android:attr/borderlessButtonStyle"
-        />
+        android:text="@string/button_begin"
+        android:textColor="@color/main_blue"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

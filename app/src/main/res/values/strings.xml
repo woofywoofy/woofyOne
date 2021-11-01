@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">woofy</string>
-    <string name="quote">"Friendship is the hardest thing in the world to explain. It's not something you learn in school. But if you haven't learned the meaning of friendship, you really haven't learned anything.<br />― <b>Muhammad Ali</b></string>
+    <string name="app_name">Woofy</string>
+    <string name="quote">"Friendship is the hardest thing in the world to explain. It's not something you learn in school. But if you haven't learned the meaning of friendship, you really haven't learned anything.
+        \n ― <b>Muhammad Ali</b></string>
+    <string name="button_begin">Begin</string>
 </resources>

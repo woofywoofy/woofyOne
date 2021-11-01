@@ -13,8 +13,8 @@ tools:context=".QuestionPage">
         android:layout_height="wrap_content"
         android:background="@color/main_blue"
         android:gravity="center"
-        android:text="Woof"
         android:paddingVertical="15sp"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
@@ -22,7 +22,8 @@ tools:context=".QuestionPage">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <!--Main Content-->
     <LinearLayout
@@ -41,25 +42,28 @@ tools:context=".QuestionPage">
 
         <!--Previous Button-->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/previous"
+            android:id="@+id/previous_button"
             android:layout_width="55dp"
             android:layout_height="20sp"
             android:layout_gravity="left"
             android:background="#0000"
-            android:gravity="center_vertical|left"
-            android:text="previous"
+            android:gravity="start|center_vertical"
+            android:text="@string/button_previous"
             android:textColor="@color/gray"
-            android:textSize="10dp" />
+            android:textSize="10sp" />
 
 
         <!--Question Counter-->
         <TextView
-            android:id="@+id/quetionCounter"
+            android:id="@+id/questionCounter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
-            android:text="quetion"
-            android:textColor="@color/main_blue" />
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/main_blue"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
 
         <!--Question-->
@@ -67,9 +71,9 @@ tools:context=".QuestionPage">
             android:id="@+id/textQuestion"
             android:layout_width="match_parent"
             android:layout_height="150sp"
-            android:gravity="center|bottom"
+            android:gravity="bottom|center"
             android:paddingBottom="15sp"
-            android:text="TextView"
+            android:text="@string/question_main"
             android:textColor="@color/main_blue" />
 
         <!--Dotted Line-->
@@ -91,45 +95,42 @@ tools:context=".QuestionPage">
 
             <!--Answer1-->
             <RadioButton
-                android:id="@+id/radioItem1"
+                android:id="@+id/radio_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/main_blue"
-                android:text="RadioButton"
-                android:textColor="@color/main_blue" />
+                android:textColor="@color/main_blue"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <!--Answer2-->
             <RadioButton
-                android:id="@+id/radioItem2"
+                android:id="@+id/radio_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/main_blue"
-                android:text="RadioButton"
                 android:textColor="@color/main_blue" />
 
             <!--Answer3-->
             <RadioButton
-                android:id="@+id/radioItem3"
+                android:id="@+id/radio_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/main_blue"
-                android:text="RadioButton"
                 android:textColor="@color/main_blue" />
 
             <!--Answer4-->
             <RadioButton
-                android:id="@+id/radioItem4"
+                android:id="@+id/radio_four"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/main_blue"
-                android:text="RadioButton"
                 android:textColor="@color/main_blue" />
             </RadioGroup>
 
 
             <!--Next Button-->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next"
+                android:id="@+id/next_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="90sp"
                 android:layout_height="40sp"

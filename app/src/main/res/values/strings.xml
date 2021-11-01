@@ -3,4 +3,7 @@
     <string name="quote">"Friendship is the hardest thing in the world to explain. It's not something you learn in school. But if you haven't learned the meaning of friendship, you really haven't learned anything.
         \n ― <b>Muhammad Ali</b></string>
     <string name="button_begin">Begin</string>
+    <string name="question_main">PLACEHOLDER FOR DATABASE PULLS</string>
+    <string name="question_counter">PLACEHOLDER FOR COUNTER</string>
+    <string name="button_previous">Previous</string>
 </resources>

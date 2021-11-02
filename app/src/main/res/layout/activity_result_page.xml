@@ -38,7 +38,7 @@ tools:context=".QuestionPage">
         >
 
 
-        <!--Question-->
+        <!--Result-->
 
         <ImageView
             android:id="@+id/imageView"

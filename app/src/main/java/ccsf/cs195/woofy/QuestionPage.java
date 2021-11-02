@@ -2,110 +2,71 @@ package ccsf.cs195.woofy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 public class QuestionPage extends AppCompatActivity {
 
-    private static String dbpath = "/data/data/ccsf.cs195.woofy/databases/woofy.db";
-    SQLiteDatabase db;
-    private static final int intQuestionRow = 10;
     private static final String questionTable = "QuestionTable";
-    private static final int intDogTableRow = 7;
-    private static final  String dogTable = "DogTable";
+    private int questNumberStart = 1;
+    private int totalQuestion;
+    private Button nextActivityButton;
+    private Button applyActivityButton;
+    private ArrayList<String> databaseReturn;
+    private TextView txtQuestion;
+    private RadioButton radioItem1;
+    private RadioButton radioItem2;
+    private RadioButton radioItem3;
+    private RadioButton radioItem4;
+    private DatabaseFunction linkDatabase = new DatabaseFunction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DatabaseFunction.initDatabase(this);
         setContentView(R.layout.activity_question_page);
 
-        TextView txtQuestion =
-                (TextView) findViewById(R.id.textQuestion);
+        txtQuestion =(TextView) findViewById(R.id.textQuestion);
+        radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
+        radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
+        radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
+        radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
+        nextActivityButton = (Button)findViewById(R.id.next);
+        applyActivityButton = (Button) findViewById(R.id.apply);
+        applyActivityButton.setVisibility(View.GONE);
 
-        RadioButton radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
-        RadioButton radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
-        RadioButton radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
-        RadioButton radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
-        initDatabase(this);
-        String[] databaseReturn = getDatabase(questionTable,intQuestionRow,"Number","2");
-        txtQuestion.setText(databaseReturn[1]);
-        radioItem1.setText(databaseReturn[2]);
-        radioItem2.setText(databaseReturn[3]);
-        radioItem3.setText(databaseReturn[4]);
-        radioItem4.setText(databaseReturn[5]);
+        totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));
+        databaseReturn = linkDatabase.getDatabase(questionTable,"Number", questNumberStart);
+
+        txtQuestion.setText(databaseReturn.get(1));
+        radioItem1.setText(databaseReturn.get(2));
+        radioItem2.setText(databaseReturn.get(3));
+        radioItem3.setText(databaseReturn.get(4));
+        radioItem4.setText(databaseReturn.get(5));
     }
 
-    public void openDatabase() {
-        db = SQLiteDatabase.openOrCreateDatabase(dbpath, null);
+    public void nextButton(View view) {
+        if (questNumberStart < totalQuestion) {
+            questNumberStart = questNumberStart + 1;
+        }
+        if (questNumberStart == totalQuestion) applyActivityButton.setVisibility(View.VISIBLE);
+        databaseReturn = linkDatabase.getDatabase(questionTable, "Number", questNumberStart);
+        txtQuestion.setText(databaseReturn.get(1));
+        radioItem1.setText(databaseReturn.get(2));
+        radioItem2.setText(databaseReturn.get(3));
+        radioItem3.setText(databaseReturn.get(4));
+        radioItem4.setText(databaseReturn.get(5));
     }
 
-    public void closeDatabase() {
-        db.close();
-    }
-
-    public void initDatabase(Context context) {
-        File folder = new File(context.getFilesDir().getParent(), "databases");
-        File databaseFile = new File(folder, "woofy.db");
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-
-        if (databaseFile.exists()) {
-            databaseFile.delete();
-        }
-
-        AssetManager assets = context.getAssets();
-        try
-        {
-            InputStream open = assets.open("woofy.db");
-            FileOutputStream fileOutStream = new FileOutputStream(databaseFile);
-            byte[] byteReadWrite = new byte[1024];
-            int len;
-            while ((len = open.read(byteReadWrite)) != -1)
-            {
-                fileOutStream.write(byteReadWrite, 0, len);
-            }
-            fileOutStream.flush();
-            fileOutStream.close();
-            open.close();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    public String[] getDatabase(String tableName, int databaseRow,String searchKey, String number) {
-        openDatabase();
-        String[] tempString = new String[databaseRow];
-        Cursor cursor;
-
-
-        cursor = db.rawQuery("select * from "+ tableName +
-                " where " + searchKey +" =? ;", new String[]{String.valueOf(number)});
-
-
-        if (cursor.getCount() != 0) {
-            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-
-                for (int i = 0; i < databaseRow; i++) {
-                    tempString[i] = cursor.getString(i);
-                }
-
-            }
-        }
-        closeDatabase();
-        return tempString;
+    public void applyButton(View view)
+    {
+        Intent intent = new Intent(QuestionPage.this, ResultPage.class);
+        startActivity(intent);
     }
 }

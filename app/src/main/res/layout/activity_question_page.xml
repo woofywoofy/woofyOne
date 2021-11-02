@@ -129,19 +129,8 @@ tools:context=".QuestionPage">
 
 
             <!--Next Button-->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="90sp"
-                android:layout_height="40sp"
-                android:layout_gravity="center"
-                android:layout_margin="10sp"
-                android:background="@drawable/my_button_bg"
-                android:text="next"
-                android:textColor="@color/main_blue" />
-      
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/next"
+            android:id="@+id/next_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="90sp"
             android:layout_height="40sp"
@@ -154,7 +143,7 @@ tools:context=".QuestionPage">
 
         <!--Apply Button-->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/apply"
+            android:id="@+id/apply_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="90sp"
             android:layout_height="40sp"

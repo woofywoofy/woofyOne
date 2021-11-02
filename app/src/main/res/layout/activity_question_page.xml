@@ -139,5 +139,31 @@ tools:context=".QuestionPage">
                 android:background="@drawable/my_button_bg"
                 android:text="next"
                 android:textColor="@color/main_blue" />
+      
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="90sp"
+            android:layout_height="40sp"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:background="@drawable/my_button_bg"
+            android:onClick="nextButton"
+            android:text="next"
+            android:textColor="@color/main_blue" />
+
+        <!--Apply Button-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/apply"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="90sp"
+            android:layout_height="40sp"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:background="@drawable/my_button_bg"
+            android:onClick="applyButton"
+            android:text="apply"
+            android:textColor="@color/main_blue" />
+      
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

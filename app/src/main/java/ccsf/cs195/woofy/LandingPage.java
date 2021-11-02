@@ -24,9 +24,6 @@ public class LandingPage extends AppCompatActivity {
         nextActivityButton = (Button)findViewById(R.id.button_begin);
         textQuestion = (TextView)findViewById(R.id.textQuestion);
 
-        // Currently breaks app due to null pointer? Idea to pass data to next activity
-        //textQuestion.setText("");
-
         nextActivityButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v)

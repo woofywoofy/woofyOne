@@ -33,12 +33,12 @@ public class QuestionPage extends AppCompatActivity {
         setContentView(R.layout.activity_question_page);
 
         txtQuestion =(TextView) findViewById(R.id.textQuestion);
-        radioItem1 = (RadioButton) findViewById(R.id.radioItem1);
-        radioItem2 = (RadioButton) findViewById(R.id.radioItem2);
-        radioItem3 = (RadioButton) findViewById(R.id.radioItem3);
-        radioItem4 = (RadioButton) findViewById(R.id.radioItem4);
-        nextActivityButton = (Button)findViewById(R.id.next);
-        applyActivityButton = (Button) findViewById(R.id.apply);
+        radioItem1 = (RadioButton) findViewById(R.id.radio_one);
+        radioItem2 = (RadioButton) findViewById(R.id.radio_two);
+        radioItem3 = (RadioButton) findViewById(R.id.radio_three);
+        radioItem4 = (RadioButton) findViewById(R.id.radio_four);
+        nextActivityButton = (Button)findViewById(R.id.next_button);
+        applyActivityButton = (Button) findViewById(R.id.apply_button);
         applyActivityButton.setVisibility(View.GONE);
 
         totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));

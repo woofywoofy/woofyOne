@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ResultPage">
+tools:context=".QuestionPage">
 
     <!--Banner-->
     <TextView
@@ -40,11 +40,10 @@ tools:context=".ResultPage">
 
         <!--Result-->
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="openWebsite"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView

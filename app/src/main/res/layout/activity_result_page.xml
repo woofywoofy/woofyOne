@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".QuestionPage">
+tools:context=".ResultPage">
 
     <!--Banner-->
     <TextView
@@ -56,10 +56,11 @@ tools:context=".QuestionPage">
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="openWebsite"
             android:layout_marginTop="32sp"
             tools:srcCompat="@tools:sample/avatars" />
 

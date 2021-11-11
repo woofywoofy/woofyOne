@@ -45,6 +45,7 @@ tools:context=".ResultPage">
 
         <!--Result-->
 
+<<<<<<< HEAD
         <TextView
             android:id="@+id/result_banner"
             android:layout_width="match_parent"

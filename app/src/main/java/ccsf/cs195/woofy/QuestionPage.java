@@ -11,23 +11,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-/* 11/2/2021 - Modify apply button (made next button do same thing)
-             - Define radioGroup to control buttons and receive button signature
-             - Enable previous button
-             - Include checks to catch errors for next and previous buttons
-
-
-   11/6/2021 - Working on class userData to track radioId's for previous function
-             - Debugging function to fetch radioId's as well - Not able to store at the moment
-
-   11/9/2021 - Begin working on 2D application of arraylist (Optimize to use DatabaseFunction method)
-             - Attempt to use radiobuttonID to check previous answers
-             - Keeping try-catch statement for debugging
-             - Fill in questions that were previous answered
-             - Transitions broke application all of sudden. Keeping in to debug
-*/
+import java.util.Arrays;
 
 public class QuestionPage extends AppCompatActivity {
 
@@ -77,6 +63,7 @@ public class QuestionPage extends AppCompatActivity {
      */
 
     public void nextButton(View view) {
+<<<<<<< HEAD
         // Verify if answer is checked and remind with message if not - Skips method
         if (radioButtonGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
@@ -169,6 +156,38 @@ public class QuestionPage extends AppCompatActivity {
         radioItem2.setText(databaseReturn.get(currentQuestion).get(3));
         radioItem3.setText(databaseReturn.get(currentQuestion).get(4));
         radioItem4.setText(databaseReturn.get(currentQuestion).get(5));
+    }
+
+    public void saveAnswer(ArrayList arrayList) {
+        ArrayList<String> stringArrayList = (ArrayList<String>) arrayList.get(0);
+        System.out.println(stringArrayList.toString());
+
+        for (int i = 2; i < stringArrayList.size(); i++) {
+
+            if (returnAnswer.size() < 7) {
+                returnAnswer.add(Integer.valueOf(stringArrayList.get(i)));
+            } else {
+                returnAnswer.set(i - 2, returnAnswer.get(i - 2) + Integer.valueOf(stringArrayList.get(i)));
+            }
+        }
+        System.out.println(returnAnswer);
+    }
+
+    public ArrayList searchData()
+    {
+        String selectAnswer = "";
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        if (radioButtonID > 0) {
+            RadioButton radioButton = radioButtonGroup.findViewById(radioButtonID);
+            selectAnswer = radioButton.getText().toString();
+        }
+        return linkDatabase.getDatabase("SELECT * FROM AnswerKey WHERE QuestionNumber = '" + (questNumberStart) + "' AND Answer = '" + selectAnswer.replace("'", "''") + "'");
+
+    }
+
+    public static ArrayList getAnswerArrayList()
+    {
+        return returnAnswer;
     }
 
     public void saveAnswer(ArrayList arrayList) {

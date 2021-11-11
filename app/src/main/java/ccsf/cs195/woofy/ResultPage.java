@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.FrameLayout;
+=======
+>>>>>>> a99b388458b6781833163686b6a7cf36bd1f9f1c
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,10 +39,9 @@ public class ResultPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_page);
         totalDog = Integer.valueOf(linkDatabase.getDatabaseCount(dogTable).get(0));
-
         ArrayList selectdog = QuestionPage.getAnswerArrayList();
         ArrayList returnData;
-        returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE size <= "+selectdog.get(0) +
+         returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE size <= "+selectdog.get(0) +
                 " AND Children >= " + selectdog.get(1)+
                 " AND ShedLevel <= " + selectdog.get(2)+
                 " AND SalivaLevel <= " + selectdog.get(3)+
@@ -114,5 +116,12 @@ public class ResultPage extends AppCompatActivity {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void openWebsite(View view)
+    {
+        Uri uriUrl = Uri.parse(databaseReturn.get(10));
+        Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(WebView);
     }
 }

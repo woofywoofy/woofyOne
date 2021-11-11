@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 public class LandingPage extends AppCompatActivity {
 
-    // Define global variable to pass to next activity
-    TextView textQuestion;
-
     //Button to move to next activity
     Button nextActivityButton;
 
@@ -22,7 +19,6 @@ public class LandingPage extends AppCompatActivity {
         setContentView(R.layout.activity_landing_page);
 
         nextActivityButton = (Button)findViewById(R.id.button_begin);
-        textQuestion = (TextView)findViewById(R.id.textQuestion);
 
         nextActivityButton.setOnClickListener(new View.OnClickListener() {
 
@@ -30,6 +26,8 @@ public class LandingPage extends AppCompatActivity {
             {
                 Intent intent = new Intent(LandingPage.this, QuestionPage.class);
                 startActivity(intent);
+                //Slide out animation when user changes screens - Broke suddenly - Keeping to debug
+                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

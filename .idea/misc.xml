@@ -10,11 +10,13 @@
         <entry key="app/src/main/res/drawable/my_button_bg.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/drawable/my_button_bg2.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/drawable/radio_button.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout-v21/activity_question_page.xml" value="0.3795289855072464" />
         <entry key="app/src/main/res/layout/ResultPage.xml" value="0.2328125" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/activity_question_page.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_result_page.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/activity_result_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.3795289855072464" />
       </map>
     </option>
   </component>

@@ -19,16 +19,14 @@ public class QuestionPage extends AppCompatActivity {
 
     private static final String questionTable = "QuestionTable";
     private static final String answerKeyTable = "AnswerKey";
-    private int currentQuestion = 0;
+    private int currentQuestion = 1;
     private int totalQuestion;
     private Button nextActivityButton;
-    private ArrayList<ArrayList<String>> databaseReturn;
+    private ArrayList<String> databaseReturn;
     private TextView txtQuestion;
     private RadioGroup radioButtonGroup;
-    private RadioButton radioItem1;
-    private RadioButton radioItem2;
-    private RadioButton radioItem3;
-    private RadioButton radioItem4;
+    private RadioButton[] radioButtons = new RadioButton[4];
+    private static ArrayList<Integer> returnAnswer = new ArrayList<>();
     private DatabaseFunction linkDatabase = new DatabaseFunction();
     private userData currentUser = new userData();
 
@@ -37,42 +35,36 @@ public class QuestionPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DatabaseFunction.initDatabase(this);
         setContentView(R.layout.activity_question_page);
-        txtQuestion =(TextView) findViewById(R.id.textQuestion);
+        txtQuestion = (TextView) findViewById(R.id.textQuestion);
         radioButtonGroup = (RadioGroup) findViewById(R.id.radioButtonGroup);
-        radioItem1 = (RadioButton) findViewById(R.id.radio_one);
-        radioItem2 = (RadioButton) findViewById(R.id.radio_two);
-        radioItem3 = (RadioButton) findViewById(R.id.radio_three);
-        radioItem4 = (RadioButton) findViewById(R.id.radio_four);
+        radioButtons[0] = (RadioButton) findViewById(R.id.radio_one);
+        radioButtons[1] = (RadioButton) findViewById(R.id.radio_two);
+        radioButtons[2] = (RadioButton) findViewById(R.id.radio_three);
+        radioButtons[3] = (RadioButton) findViewById(R.id.radio_four);
         nextActivityButton = (Button)findViewById(R.id.next_button);
 
         totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));
 
-        // Pulls all questions/responses into 2D ArrayList
-        databaseReturn = linkDatabase.getAllDatabase(questionTable);
+        databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
         setText();
     }
 
-    // Slide out animation when user changes screens - Broke suddenly - Keeping to debug
-    /*
     @Override
     public void finish() {
         super.finish();
         //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-     */
-
     public void nextButton(View view) {
-<<<<<<< HEAD
         // Verify if answer is checked and remind with message if not - Skips method
         if (radioButtonGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
-        } else if (currentQuestion < totalQuestion - 1) {
+        } else if (currentQuestion < totalQuestion) {
 
             if (currentQuestion >= currentUser.buttonSize()) {
                 currentUser.add(radioButtonGroup.getCheckedRadioButtonId());
             } else {
-                currentUser.set(currentQuestion, radioButtonGroup.getCheckedRadioButtonId());
+                currentUser.set(currentQuestion - 1, radioButtonGroup.getCheckedRadioButtonId());
             }
 
             currentQuestion++;
@@ -84,21 +76,21 @@ public class QuestionPage extends AppCompatActivity {
             setText();
 
             if (currentQuestion < currentUser.buttonSize()) {
-                switch (currentUser.get(currentQuestion)) {
+                switch (currentUser.get(currentQuestion - 1)) {
                     case R.id.radio_one:
-                        radioItem1.setChecked(true);
+                        radioButtons[0].setChecked(true);
                         radioButtonGroup.jumpDrawablesToCurrentState();
                         break;
                     case R.id.radio_two:
-                        radioItem2.setChecked(true);
+                        radioButtons[1].setChecked(true);
                         radioButtonGroup.jumpDrawablesToCurrentState();
                         break;
                     case R.id.radio_three:
-                        radioItem3.setChecked(true);
+                        radioButtons[2].setChecked(true);
                         radioButtonGroup.jumpDrawablesToCurrentState();
                         break;
                     case R.id.radio_four:
-                        radioItem4.setChecked(true);
+                        radioButtons[3].setChecked(true);
                         radioButtonGroup.jumpDrawablesToCurrentState();
                         break;
                 }
@@ -118,7 +110,7 @@ public class QuestionPage extends AppCompatActivity {
 
 
     public void previousButton(View view) {
-        if (currentQuestion == 0) {
+        if (currentQuestion == 1) {
             Toast.makeText(getApplicationContext(), "You're already at the beginning!", Toast.LENGTH_SHORT).show();
         } else {
             if (currentQuestion == totalQuestion) {
@@ -127,35 +119,35 @@ public class QuestionPage extends AppCompatActivity {
 
             currentQuestion--;
 
-                switch (currentUser.get(currentQuestion)) {
-                    case R.id.radio_one:
-                        radioItem1.setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_two:
-                        radioItem2.setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_three:
-                        radioItem3.setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_four:
-                        radioItem4.setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                }
+            switch (currentUser.get(currentQuestion - 1)) {
+                case R.id.radio_one:
+                    radioButtons[0].setChecked(true);
+                    radioButtonGroup.jumpDrawablesToCurrentState();
+                    break;
+                case R.id.radio_two:
+                    radioButtons[1].setChecked(true);
+                    radioButtonGroup.jumpDrawablesToCurrentState();
+                    break;
+                case R.id.radio_three:
+                    radioButtons[2].setChecked(true);
+                    radioButtonGroup.jumpDrawablesToCurrentState();
+                    break;
+                case R.id.radio_four:
+                    radioButtons[3].setChecked(true);
+                    radioButtonGroup.jumpDrawablesToCurrentState();
+                    break;
+            }
 
             setText();
         }
     }
 
     public void setText() {
-        txtQuestion.setText(databaseReturn.get(currentQuestion).get(1));
-        radioItem1.setText(databaseReturn.get(currentQuestion).get(2));
-        radioItem2.setText(databaseReturn.get(currentQuestion).get(3));
-        radioItem3.setText(databaseReturn.get(currentQuestion).get(4));
-        radioItem4.setText(databaseReturn.get(currentQuestion).get(5));
+        databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
+        txtQuestion.setText(databaseReturn.get(1));
+        for (int i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].setText(databaseReturn.get(i + 2));
+        }
     }
 
     public void saveAnswer(ArrayList arrayList) {
@@ -181,39 +173,7 @@ public class QuestionPage extends AppCompatActivity {
             RadioButton radioButton = radioButtonGroup.findViewById(radioButtonID);
             selectAnswer = radioButton.getText().toString();
         }
-        return linkDatabase.getDatabase("SELECT * FROM AnswerKey WHERE QuestionNumber = '" + (questNumberStart) + "' AND Answer = '" + selectAnswer.replace("'", "''") + "'");
-
-    }
-
-    public static ArrayList getAnswerArrayList()
-    {
-        return returnAnswer;
-    }
-
-    public void saveAnswer(ArrayList arrayList) {
-        ArrayList<String> stringArrayList = (ArrayList<String>) arrayList.get(0);
-        System.out.println(stringArrayList.toString());
-
-        for (int i = 2; i < stringArrayList.size(); i++) {
-
-            if (returnAnswer.size() < 7) {
-                returnAnswer.add(Integer.valueOf(stringArrayList.get(i)));
-            } else {
-                returnAnswer.set(i - 2, returnAnswer.get(i - 2) + Integer.valueOf(stringArrayList.get(i)));
-            }
-        }
-        System.out.println(returnAnswer);
-    }
-
-    public ArrayList searchData()
-    {
-        String selectAnswer = "";
-        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
-        if (radioButtonID > 0) {
-            RadioButton radioButton = radioButtonGroup.findViewById(radioButtonID);
-            selectAnswer = radioButton.getText().toString();
-        }
-        return linkDatabase.getDatabase("SELECT * FROM AnswerKey WHERE QuestionNumber = '" + (questNumberStart) + "' AND Answer = '" + selectAnswer.replace("'", "''") + "'");
+        return linkDatabase.getDatabase("SELECT * FROM AnswerKey WHERE QuestionNumber = '" + (currentQuestion) + "' AND Answer = '" + selectAnswer.replace("'", "''") + "'");
 
     }
 

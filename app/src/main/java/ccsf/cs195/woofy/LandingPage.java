@@ -26,8 +26,7 @@ public class LandingPage extends AppCompatActivity {
             {
                 Intent intent = new Intent(LandingPage.this, QuestionPage.class);
                 startActivity(intent);
-                //Slide out animation when user changes screens - Broke suddenly - Keeping to debug
-                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

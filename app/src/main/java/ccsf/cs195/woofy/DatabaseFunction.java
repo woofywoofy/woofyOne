@@ -97,6 +97,24 @@ public class DatabaseFunction {
         return tempString;
     }
 
+    public ArrayList<ArrayList> getDatabase(String sqlCommand) {
+        openDatabase();
+        ArrayList<ArrayList> tempString = new ArrayList<>();
+        Cursor cursor;
+        cursor = db.rawQuery(sqlCommand, null);
+        if (cursor.getCount() != 0) {
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                ArrayList colume = new ArrayList();
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    colume.add(cursor.getString(i));
+                }
+                tempString.add(colume);
+            }
+        }
+        closeDatabase();
+        return tempString;
+    }
+
     public ArrayList<String> getDatabase(String tableName,String searchKey, Object number) {
         openDatabase();
         ArrayList<String> tempString = new ArrayList<>();

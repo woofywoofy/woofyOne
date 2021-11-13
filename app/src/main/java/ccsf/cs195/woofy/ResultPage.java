@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.FrameLayout;
-=======
->>>>>>> a99b388458b6781833163686b6a7cf36bd1f9f1c
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,15 +73,11 @@ public class ResultPage extends AppCompatActivity {
         startActivity(WebView);
     }
 
-    // Slide out animation when user changes screens - Broke suddenly - Keeping to debug
-    /*
     @Override
     public void finish() {
         super.finish();
-        //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
-     */
 
     // FOR DEMO ONLY - REBUILDING RIGHT AFTER DEMO
     public void setDogs() {
@@ -116,12 +109,5 @@ public class ResultPage extends AppCompatActivity {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void openWebsite(View view)
-    {
-        Uri uriUrl = Uri.parse(databaseReturn.get(10));
-        Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
-        startActivity(WebView);
     }
 }

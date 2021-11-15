@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/* 11/9/2021 - Modified getDatabase to getAllDatabase, sql query to pull all rows
+ */
+
 public class DatabaseFunction {
 
     private static String dbpath = "/data/data/ccsf.cs195.woofy/databases/woofy.db";
@@ -68,6 +71,29 @@ public class DatabaseFunction {
             }
         }
         closeDatabase();
+        cursor.close();
+        return tempString;
+    }
+
+    // Modified to pull all data from table to store in 2D ArrayList
+    public ArrayList<ArrayList<String>> getAllDatabase(String tableName) {
+        openDatabase();
+        ArrayList<ArrayList<String>> tempString = new ArrayList<>();
+        Cursor cursor;
+        cursor = db.rawQuery("select * from "+ tableName, null);
+
+
+        if (cursor.getCount() != 0) {
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                ArrayList<String> column = new ArrayList<>();
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    column.add(cursor.getString(i));
+                }
+                tempString.add(column);
+            }
+        }
+        closeDatabase();
+        cursor.close();
         return tempString;
     }
 
@@ -107,6 +133,7 @@ public class DatabaseFunction {
             }
         }
         closeDatabase();
+        cursor.close();
         return tempString;
     }
 

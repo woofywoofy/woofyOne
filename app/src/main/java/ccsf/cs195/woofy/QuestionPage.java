@@ -3,6 +3,7 @@ package ccsf.cs195.woofy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class QuestionPage extends AppCompatActivity {
     private int currentQuestion = 1;
     private int totalQuestion;
     private Button nextActivityButton;
+    private Button previousBT;
     private ArrayList<String> databaseReturn;
     private TextView txtQuestion;
     private RadioGroup radioButtonGroup;
@@ -44,9 +46,10 @@ public class QuestionPage extends AppCompatActivity {
         nextActivityButton = (Button)findViewById(R.id.next_button);
 
         totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));
+        previousBT = (Button) findViewById(R.id.previous_button);
+        previousBT.setTextColor(Color.WHITE);
 
-        databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
-        setText();
+        updateText();
     }
 
     @Override
@@ -56,56 +59,72 @@ public class QuestionPage extends AppCompatActivity {
     }
 
     public void nextButton(View view) {
+
         // Verify if answer is checked and remind with message if not - Skips method
-        if (radioButtonGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
-        } else if (currentQuestion < totalQuestion) {
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        if (currentQuestion >= 1) {
+            previousBT.setTextColor(Color.BLUE);}
 
-            if (currentQuestion >= currentUser.buttonSize()) {
-                currentUser.add(radioButtonGroup.getCheckedRadioButtonId());
-            } else {
-                currentUser.set(currentQuestion - 1, radioButtonGroup.getCheckedRadioButtonId());
-            }
 
-            currentQuestion++;
+        if(currentQuestion == totalQuestion) {
+            if (radioButtonID <= 0) {
+                Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
+            } else if (radioButtonID>0) {
+                saveAnswer(searchData());
 
-            if (currentQuestion == totalQuestion) {
-                nextActivityButton.setText("Apply");
-            }
-
-            setText();
-
-            if (currentQuestion < currentUser.buttonSize()) {
-                switch (currentUser.get(currentQuestion - 1)) {
-                    case R.id.radio_one:
-                        radioButtons[0].setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_two:
-                        radioButtons[1].setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_three:
-                        radioButtons[2].setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                    case R.id.radio_four:
-                        radioButtons[3].setChecked(true);
-                        radioButtonGroup.jumpDrawablesToCurrentState();
-                        break;
-                }
-
-            } else {
-                    // Reset button selection after each answer + Cut animation out
-                    radioButtonGroup.clearCheck();
-                    radioButtonGroup.jumpDrawablesToCurrentState();
-                }
-            }
-            else {
                 Intent intent = new Intent(QuestionPage.this, ResultPage.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
+        } else if(currentQuestion < totalQuestion){
+
+            if (radioButtonID <= 0) {
+                Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
+            } else if (radioButtonID>0 && currentQuestion < totalQuestion) {
+                saveAnswer(searchData());
+                currentQuestion++;
+
+                if (currentQuestion == totalQuestion) {
+                    nextActivityButton.setText("Apply");
+                }
+
+                updateText();
+
+                if (currentQuestion >= currentUser.buttonSize()) {
+                    currentUser.add(radioButtonID);
+                } else {
+                    currentUser.set(currentQuestion - 1, radioButtonID);
+                }
+
+                if (currentQuestion < currentUser.buttonSize()) {
+                    switch (currentUser.get(currentQuestion - 1)) {
+                        case R.id.radio_one:
+                            radioButtons[0].setChecked(true);
+                            radioButtonGroup.jumpDrawablesToCurrentState();
+                            break;
+                        case R.id.radio_two:
+                            radioButtons[1].setChecked(true);
+                            radioButtonGroup.jumpDrawablesToCurrentState();
+                            break;
+                        case R.id.radio_three:
+                            radioButtons[2].setChecked(true);
+                            radioButtonGroup.jumpDrawablesToCurrentState();
+                            break;
+                        case R.id.radio_four:
+                            radioButtons[3].setChecked(true);
+                            radioButtonGroup.jumpDrawablesToCurrentState();
+                            break;
+                    }
+                }else {
+
+                    radioButtonGroup.clearCheck();
+                    radioButtonGroup.jumpDrawablesToCurrentState();
+                }
+
+                // Reset button selection after each answer + Cut animation out
+
+            }
+        }
     }
 
 
@@ -113,11 +132,16 @@ public class QuestionPage extends AppCompatActivity {
         if (currentQuestion == 1) {
             Toast.makeText(getApplicationContext(), "You're already at the beginning!", Toast.LENGTH_SHORT).show();
         } else {
+
+
             if (currentQuestion == totalQuestion) {
                 nextActivityButton.setText("Next");
             }
 
             currentQuestion--;
+
+            if (currentQuestion == 1) previousBT.setTextColor(Color.WHITE);
+
 
             switch (currentUser.get(currentQuestion - 1)) {
                 case R.id.radio_one:
@@ -138,11 +162,11 @@ public class QuestionPage extends AppCompatActivity {
                     break;
             }
 
-            setText();
+            updateText();
         }
     }
 
-    public void setText() {
+    public void updateText() {
         databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
         txtQuestion.setText(databaseReturn.get(1));
         for (int i = 0; i < radioButtons.length; i++) {
@@ -151,18 +175,26 @@ public class QuestionPage extends AppCompatActivity {
     }
 
     public void saveAnswer(ArrayList arrayList) {
-        ArrayList<String> stringArrayList = (ArrayList<String>) arrayList.get(0);
-        System.out.println(stringArrayList.toString());
 
-        for (int i = 2; i < stringArrayList.size(); i++) {
+        if(arrayList.size() > 0) {
+            ArrayList<String> stringArrayList = (ArrayList<String>) arrayList.get(0);
+            System.out.println(stringArrayList.toString());
 
-            if (returnAnswer.size() < 7) {
-                returnAnswer.add(Integer.valueOf(stringArrayList.get(i)));
-            } else {
-                returnAnswer.set(i - 2, returnAnswer.get(i - 2) + Integer.valueOf(stringArrayList.get(i)));
+            for (int i = 2; i < stringArrayList.size(); i++) {
+
+                if (returnAnswer.size() < totalQuestion) {
+                    returnAnswer.add(Integer.valueOf(stringArrayList.get(i)));
+                } else {
+                    if (Integer.valueOf(stringArrayList.get(i)) > 0) {
+                        returnAnswer.set(i - 2, Integer.valueOf(stringArrayList.get(i)));
+                        break;
+                    }
+                }
             }
+            System.out.println(returnAnswer);
+        } else {
+            System.out.println("Empty");
         }
-        System.out.println(returnAnswer);
     }
 
     public ArrayList searchData()

@@ -3,11 +3,11 @@
     <string name="quote">"Friendship is the hardest thing in the world to explain. It's not something you learn in school. But if you haven't learned the meaning of friendship, you really haven't learned anything.
         \n ― <b>Muhammad Ali</b></string>
     <string name="button_begin">Begin</string>
-    <string name="question_main">PLACEHOLDER FOR DATABASE PULLS</string>
-    <string name="question_counter">PLACEHOLDER FOR COUNTER</string>
+    <string name="question_main">PLACEHOLDER</string>
+    <string name="question_counter">%1$d / %2$d</string>
     <string name="button_previous">Previous</string>
     <string name="selection_text">Here\'s what we matched with!</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="discover_more">Click on a dog to find out more!</string>
     <string name="button_next">Next</string>

@@ -26,6 +26,7 @@ public class QuestionPage extends AppCompatActivity {
     private Button previousBT;
     private ArrayList<String> databaseReturn;
     private TextView txtQuestion;
+    private TextView questionCounter;
     private RadioGroup radioButtonGroup;
     private RadioButton[] radioButtons = new RadioButton[4];
     private static ArrayList<Integer> returnAnswer = new ArrayList<>();
@@ -38,6 +39,7 @@ public class QuestionPage extends AppCompatActivity {
         DatabaseFunction.initDatabase(this);
         setContentView(R.layout.activity_question_page);
         txtQuestion = (TextView) findViewById(R.id.textQuestion);
+        questionCounter = (TextView) findViewById(R.id.runningPicks);
         radioButtonGroup = (RadioGroup) findViewById(R.id.radioButtonGroup);
         radioButtons[0] = (RadioButton) findViewById(R.id.radio_one);
         radioButtons[1] = (RadioButton) findViewById(R.id.radio_two);
@@ -46,6 +48,7 @@ public class QuestionPage extends AppCompatActivity {
         nextActivityButton = (Button)findViewById(R.id.next_button);
 
         totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));
+        questionCounter.setText(getString(R.string.question_counter, currentQuestion, totalQuestion));
         previousBT = (Button) findViewById(R.id.previous_button);
         previousBT.setTextColor(Color.WHITE);
 
@@ -55,21 +58,21 @@ public class QuestionPage extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void nextButton(View view) {
 
-        // Verify if answer is checked and remind with message if not - Skips method
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
         if (currentQuestion >= 1) {
-            previousBT.setTextColor(Color.BLUE);}
+            previousBT.setTextColor(Color.BLUE);
+        }
 
-
+        //
         if(currentQuestion == totalQuestion) {
             if (radioButtonID <= 0) {
                 Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
-            } else if (radioButtonID>0) {
+            } else if (radioButtonID > 0) {
                 saveAnswer(searchData());
 
                 Intent intent = new Intent(QuestionPage.this, ResultPage.class);
@@ -80,7 +83,7 @@ public class QuestionPage extends AppCompatActivity {
 
             if (radioButtonID <= 0) {
                 Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
-            } else if (radioButtonID>0 && currentQuestion < totalQuestion) {
+            } else if (radioButtonID > 0 && currentQuestion < totalQuestion) {
                 saveAnswer(searchData());
                 currentQuestion++;
 
@@ -90,10 +93,10 @@ public class QuestionPage extends AppCompatActivity {
 
                 updateText();
 
-                if (currentQuestion >= currentUser.buttonSize()) {
+                if (currentQuestion > currentUser.buttonSize()) {
                     currentUser.add(radioButtonID);
                 } else {
-                    currentUser.set(currentQuestion - 1, radioButtonID);
+                    currentUser.set(currentQuestion - 2, radioButtonID);
                 }
 
                 if (currentQuestion < currentUser.buttonSize()) {
@@ -115,14 +118,10 @@ public class QuestionPage extends AppCompatActivity {
                             radioButtonGroup.jumpDrawablesToCurrentState();
                             break;
                     }
-                }else {
-
+                } else {
                     radioButtonGroup.clearCheck();
                     radioButtonGroup.jumpDrawablesToCurrentState();
                 }
-
-                // Reset button selection after each answer + Cut animation out
-
             }
         }
     }
@@ -133,14 +132,15 @@ public class QuestionPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "You're already at the beginning!", Toast.LENGTH_SHORT).show();
         } else {
 
-
             if (currentQuestion == totalQuestion) {
                 nextActivityButton.setText("Next");
             }
 
             currentQuestion--;
 
-            if (currentQuestion == 1) previousBT.setTextColor(Color.WHITE);
+            if (currentQuestion == 1) {
+                previousBT.setTextColor(Color.WHITE);
+            }
 
 
             switch (currentUser.get(currentQuestion - 1)) {
@@ -169,6 +169,7 @@ public class QuestionPage extends AppCompatActivity {
     public void updateText() {
         databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
         txtQuestion.setText(databaseReturn.get(1));
+        questionCounter.setText(getString(R.string.question_counter, currentQuestion, totalQuestion));
         for (int i = 0; i < radioButtons.length; i++) {
             radioButtons[i].setText(databaseReturn.get(i + 2));
         }

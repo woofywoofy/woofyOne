@@ -72,4 +72,8 @@ public class ResultPage extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+    public void backToMain(View view) {
+        Intent intent = new Intent(ResultPage.this,LandingPage.class);
+        startActivity(intent);
+    }
 }

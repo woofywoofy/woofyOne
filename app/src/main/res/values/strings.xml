@@ -4,11 +4,13 @@
         \n ― <b>Muhammad Ali</b></string>
     <string name="button_begin">Begin</string>
     <string name="question_main">PLACEHOLDER</string>
-    <string name="question_counter">%1$d / %2$d</string>
+    <string name="question_counter">%1$d of %2$d questions</string>
     <string name="button_previous">Previous</string>
-    <string name="selection_text">Here\'s what we matched with!</string>
+    <string name="selection_text">Your Best Matched Furry Besties!</string>
+    <string name="discover_more">Click on picture to learn more about the breed</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="discover_more">Click on a dog to find out more!</string>
+
     <string name="button_next">Next</string>
 </resources>

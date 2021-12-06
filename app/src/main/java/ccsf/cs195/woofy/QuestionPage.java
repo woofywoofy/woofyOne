@@ -64,9 +64,7 @@ public class QuestionPage extends AppCompatActivity {
     public void nextButton(View view) {
 
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
-        if (currentQuestion >= 1) {
-            previousBT.setTextColor(Color.BLUE);
-        }
+
 
         //
         if(currentQuestion == totalQuestion) {
@@ -88,7 +86,7 @@ public class QuestionPage extends AppCompatActivity {
                 currentQuestion++;
 
                 if (currentQuestion == totalQuestion) {
-                    nextActivityButton.setText("Apply");
+                    nextActivityButton.setText("Go Fetch");
                 }
 
                 updateText();
@@ -122,6 +120,9 @@ public class QuestionPage extends AppCompatActivity {
                     radioButtonGroup.clearCheck();
                     radioButtonGroup.jumpDrawablesToCurrentState();
                 }
+            }
+            if (currentQuestion > 1) {
+                previousBT.setTextColor(Color.parseColor("#589dfc"));
             }
         }
     }
@@ -202,6 +203,7 @@ public class QuestionPage extends AppCompatActivity {
     {
         String selectAnswer = "";
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        System.out.println(radioButtonID);
         if (radioButtonID > 0) {
             RadioButton radioButton = radioButtonGroup.findViewById(radioButtonID);
             selectAnswer = radioButton.getText().toString();

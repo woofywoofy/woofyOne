@@ -54,7 +54,7 @@ public class ResultPage extends AppCompatActivity {
                 " AND AmountOfMotion <= " + selectdog.get(5)+
                 " AND WoofLevel <= " + selectdog.get(6));
 
-        if(returnData.size()==0)
+        if(returnData.size() < 5)
         {
             goodMatch = false;
             returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +

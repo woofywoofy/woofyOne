@@ -4,7 +4,7 @@
 
 
 ## About
-wallabag has been made for you to findout the best fit dog breed for the user's lifestyle by answering a mutile answers suvrvey.
+Woofy has been developed for users to findout the best fit dog breed for the their lifestyle by answering a mutile answers suvrvey.
 
 This application is created by Chu Cheng Li, Jiahui Li, Oscar Galvez, and Zhiren Zheng as a group project in fulfilling City College of San Francisco CS-195 course requirement. 
 

@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.w3c.dom.Text;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -167,65 +169,104 @@ public class ResultPage extends AppCompatActivity {
 
     //Backend logic to generate the result page with final result
     public void contentGenerator(int numberOfElement, LinearLayout contentView){
-        for (int i = 1; i <= numberOfElement; i++) {
 
-            //Creating new image view that display the dog's picture
-            ImageView im = new ImageView(this);
+        //Generate result page if no match dog
+        if(numberOfElement == 0) {
+
+            ImageView im = imageViewGenerator();
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     android.view.ViewGroup.LayoutParams
-                            .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(0, 90, 0, 0);
-            lp.gravity = Gravity.CENTER_HORIZONTAL;
-            im.setClickable(true);
-            im.setFocusable(true);
-            String newUri = (String) sortedList.get(     //casting url data into string
-                    sortedList.size()-i).first.get(10);
-            im.setOnClickListener(new View.OnClickListener(){   //setting onClick functionality that open a link of the dog
-                public void onClick(View v){
-                Uri uriUrl = Uri.parse(newUri);
-                Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(WebView);
+                            .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            im.setLayoutParams(lp);
+            im.setOnClickListener(new View.OnClickListener() {   //setting onClick functionality that open a link of the dog
+                public void onClick(View v) {
+                    Uri uriUrl = Uri.parse("https://www.freepik.com/photos/animals");
+                    Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(WebView);
                 }
             });
-            im.setLayoutParams(lp);
 
-            //Creating new textView for the name of breed
-            TextView tv1 = new TextView(this);
-            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-                    android.view.ViewGroup.LayoutParams
-                            .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            tv1.setLayoutParams(lp2);
-            tv1.setTextColor(getResources().getColor(R.color.main_blue));
-            tv1.setTextSize(2, 25);
-            tv1.setTypeface(Typeface.DEFAULT_BOLD);
-            tv1.setGravity(Gravity.CENTER);
+            TextView tv1 = textViewGenerator(25, Typeface.DEFAULT_BOLD);
+            tv1.setPadding(0,50,0,0);
 
-            //Creating new text view for the match percentage info
-            TextView tv2 = new TextView(this);
-            LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(
-                    android.view.ViewGroup.LayoutParams
-                            .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            tv2.setLayoutParams(lp3);
-            tv2.setTextColor(getResources().getColor(R.color.main_blue));
-            tv2.setTextSize(2, 20);
-            tv2.setTypeface(Typeface.DEFAULT);
-            tv2.setGravity(Gravity.CENTER);
-
-            //Setting data into the created views
-            try {       //Setting picture to the created image view with URL
-                new ImageTask(im).execute(new URL((String) sortedList.get(sortedList.size() - i).first.get(9)));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            tv1.setText((String) sortedList.get(        //Setting breed name to the created textview
-                    sortedList.size() - i).first.get(0));
-            tv2.setText((sortedList.get(        //Setting match percentage to the created textview
-                    sortedList.size() - i).second) + "% match");
-
-            //Add created view to the designated view to display in result page
+            TextView rb = findViewById(R.id.result_banner);
+            rb.setText("");
+            TextView rd = findViewById(R.id.result_discover);
+            rd.setText("");
+            im.setBackgroundResource(R.drawable.cat);
+            tv1.setText("Maybe you are a cat person~");
             contentView.addView(im);
             contentView.addView(tv1);
-            contentView.addView(tv2);
+
+        } else {
+            for (int i = 1; i <= numberOfElement; i++) {
+
+                //Creating new image view that display the dog's picture
+                ImageView im = imageViewGenerator();
+                String newUri = (String) sortedList.get(     //casting url data into string
+                        sortedList.size() - i).first.get(10);
+                im.setOnClickListener(new View.OnClickListener() {   //setting onClick functionality that open a link of the dog
+                    public void onClick(View v) {
+                        Uri uriUrl = Uri.parse(newUri);
+                        Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                        startActivity(WebView);
+                    }
+                });
+
+                //Creating new textView for the name of breed
+                TextView tv1 = textViewGenerator(25, Typeface.DEFAULT_BOLD);
+
+                //Creating new text view for the match percentage info
+                TextView tv2 = textViewGenerator(20, Typeface.DEFAULT);
+
+                //Setting data into the created views
+                try {       //Setting picture to the created image view with URL
+                    new ImageTask(im).execute(new URL((String) sortedList.get(sortedList.size() - i).first.get(9)));
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                tv1.setText((String) sortedList.get(        //Setting breed name to the created textview
+                        sortedList.size() - i).first.get(0));
+                tv2.setText((sortedList.get(        //Setting match percentage to the created textview
+                        sortedList.size() - i).second) + "% match");
+
+                //Add created view to the designated view to display in result page
+                contentView.addView(im);
+                contentView.addView(tv1);
+                contentView.addView(tv2);
+            }
         }
+    }
+
+    //Image View Generator
+    public ImageView imageViewGenerator() {
+
+        ImageView im = new ImageView(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(0, 90, 0, 0);
+        lp.gravity = Gravity.CENTER_HORIZONTAL;
+        im.setClickable(true);
+        im.setFocusable(true);
+        im.setLayoutParams(lp);
+
+        return im;
+    }
+
+    //Text View Generator
+    public TextView textViewGenerator(int textSize, Typeface textType) {
+
+        TextView tv = new TextView(this);
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        tv.setLayoutParams(lp2);
+        tv.setTextColor(getResources().getColor(R.color.main_blue));
+        tv.setTextSize(2, textSize);
+        tv.setTypeface(textType);
+        tv.setGravity(Gravity.CENTER);
+
+        return tv;
     }
 }

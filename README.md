@@ -1,12 +1,12 @@
 # Woofy - Android App
 
-
-
+“Woofy” is a lifestyle Android application that helps users to determine the breed of dog that best fits their personality and lifestyle by analyzing a short survey answered by the user.
 
 
 ## About
+wallabag has been made for you to findout the best fit dog breed for the user's lifestyle by answering a mutile answers suvrvey.
 
-## Features
+This application is created by Chu Cheng Li, Jiahui Li, Oscar Galvez, and Zhiren Zheng as a group project in fulfilling City College of San Francisco CS-195 course requirement. 
 
 ## Screenshots
 
@@ -26,7 +26,33 @@ width="100"
 
 ## Build requirement
 
-## Running sample app
+## Instruction of using the app
+
+###Landing page
+
+*Click Begin to go to the Instruction page
+
+###Instruction page
+
+Carefully read the given information
+
+*Click Understand to acknowledge and agree to the information, and begin the survey
+
+###Question page
+
+*Click on the Next button after an answer is selected to go to the next question. 
+
+*Click on the Previous button If you want to reselect the answer to a previous question.
+
+*Click on the Go Fetch button on the last question to see your result.
+
+###Result page
+
+*Click on the picture to learn more about the breed from the American Kennel Club website.
+
+*Click on the Home button at the bottom right corner of the screen to restart the survey.
+
+
 
 ## Contributing
 

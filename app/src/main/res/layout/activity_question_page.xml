@@ -42,21 +42,6 @@ Program note: Question page frontend
         app:layout_constraintTop_toBottomOf="@id/banner"
         app:layout_constraintVertical_bias="0.278">
 
-
-        <!--Previous Button-->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/previous_button"
-            android:layout_width="55dp"
-            android:layout_height="20sp"
-            android:layout_gravity="left"
-            android:background="#0000"
-            android:gravity="start|center_vertical"
-            android:text="@string/button_previous"
-            android:onClick="previousButton"
-            android:textColor="@color/main_blue"
-            android:textSize="10sp" />
-
-
         <!--Question Counter-->
         <TextView
             android:id="@+id/runningPicks"
@@ -140,11 +125,24 @@ Program note: Question page frontend
             android:layout_width="90sp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:layout_margin="10sp"
+            android:layout_margin="20sp"
             android:background="@drawable/my_button_bg"
             android:onClick="nextButton"
             android:text="@string/button_next"
             android:textColor="@color/main_blue" />
+
+        <!--Previous Button-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/previous_button"
+            android:layout_width="55dp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:background="#0000"
+            android:text="@string/button_previous"
+            android:textAlignment="center"
+            android:onClick="previousButton"
+            android:textColor="@color/main_blue"
+            android:textSize="10sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

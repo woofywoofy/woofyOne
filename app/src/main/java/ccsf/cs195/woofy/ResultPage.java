@@ -44,7 +44,6 @@ public class ResultPage extends AppCompatActivity {
         ArrayList selectdog = QuestionPage.getAnswerArrayList();
         ArrayList<ArrayList> returnData;
 
-        Boolean goodMatch = true;
         returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
                 "size <= " +selectdog.get(0) +
                 " AND Children >= " + selectdog.get(1)+
@@ -56,7 +55,6 @@ public class ResultPage extends AppCompatActivity {
 
         if(returnData.size() < 5)
         {
-            goodMatch = false;
             returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
                     "size <= " + selectdog.get(0) +
                     " AND Children >= " + selectdog.get(1)+
@@ -65,31 +63,41 @@ public class ResultPage extends AppCompatActivity {
                     " AND WoofLevel <= " + selectdog.get(6));
         }
 
-        int matchCount = selectdog.size();
-        if(!goodMatch) {
-            matchCount = 5;
+        if(returnData.size() < 5)
+        {
+            returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
+                    "size <= " + selectdog.get(0) +
+                    " AND Children >= " + selectdog.get(1)+
+                    " AND ShedLevel <= " + selectdog.get(2)+
+                    " AND WoofLevel <= " + selectdog.get(6));
         }
+        System.out.println("Total returned data" + returnData.size());
+
         for(int i = 0; i < returnData.size(); i++) {
             double matchPercent = 0;
             databaseReturn = returnData.get(i);
+            double countElements = 0.0;
+            for(int j = 0; j < selectdog.size(); j++) {
 
-            for(int j = 0; j < matchCount; j++) {
-                double percent = (Double.parseDouble(selectdog
-                        .get(j).toString())/Double
-                        .parseDouble(databaseReturn.get(j+2)))*100.0;
+                if(Double.parseDouble(databaseReturn.get(j+2)) != 0){
+                    double percent = (Double.parseDouble(selectdog
+                            .get(j).toString())/Double
+                            .parseDouble(databaseReturn.get(j+2)))*100.0;
 
-                if(percent > 100.0) {
+                    if(percent > 100.0) {
 
-                    if (percent % 100 == 0) {
-                        matchPercent = matchPercent + 100;
+                        if (percent % 100 == 0) {
+                            matchPercent = matchPercent + 100;
+                        } else {
+                            matchPercent = matchPercent + (percent % 100);
+                        }
                     } else {
-                        matchPercent = matchPercent + (percent % 100);
+                        matchPercent = matchPercent + percent;
                     }
-                } else {
-                    matchPercent = matchPercent + percent;
+                    countElements= countElements + 1.0;
                 }
             }
-            matchPercent = matchPercent/selectdog.size();
+            matchPercent = matchPercent/countElements;
             int roundedPercent = (int) Math.round(matchPercent);
 
             if(sortedList == null || sortedList.isEmpty()) {
@@ -99,10 +107,14 @@ public class ResultPage extends AppCompatActivity {
                     if(roundedPercent <= sortedList.get(n).second) {
                         sortedList.add(n, Pair.create(databaseReturn,roundedPercent));
                         break;
+                    } else if(n == sortedList.size()-1) {
+                        sortedList.add(n+1, Pair.create(databaseReturn,roundedPercent));
+                        break;
                     }
                 }
             }
         }
+        System.out.println("Total data in sortedList" + sortedList.size());
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,12 +133,6 @@ public class ResultPage extends AppCompatActivity {
         contentGenerator(count, contentView);
     }
 
-    public void openWebsite(View view)
-    {
-        Uri uriUrl = Uri.parse(databaseReturn.get(10));
-        Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
-        startActivity(WebView);
-    }
 
     @Override
     public void finish() {
@@ -152,7 +158,15 @@ public class ResultPage extends AppCompatActivity {
             lp.gravity = Gravity.CENTER_HORIZONTAL;
             im.setClickable(true);
             im.setFocusable(true);
-            im.setOnClickListener(this::openWebsite);
+
+            String newUri = (String) sortedList.get(sortedList.size()-i).first.get(10);
+            im.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                Uri uriUrl = Uri.parse(newUri);
+                Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(WebView);
+                }
+            });
             im.setLayoutParams(lp);
 
             TextView tv1 = new TextView(this);

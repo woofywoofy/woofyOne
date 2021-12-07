@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/activity_question_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_result_page.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.1" />
       </map>
     </option>
   </component>

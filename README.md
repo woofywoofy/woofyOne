@@ -34,7 +34,7 @@ For contributions via GitHub, see the [GitHub Contribution Guide](CONTRIBUTING.m
 
 ## Right to the project
 
-Initial constributors: Chu Cheng Li, Jiahui Li, Oscar Galvez, Zhiren Zheng, have all right to the project's code and idea.
+Initial constributors: Chu Cheng Li, Jiahui Li, Oscar Galvez, Zhiren Zheng, have all right to the project's code and design.
 
 ### Using the project
 

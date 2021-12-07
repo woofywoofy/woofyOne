@@ -10,6 +10,20 @@
 
 ## Screenshots
 
+[<img src="/README/LandingPage.jpeg" align="center"
+width="100"
+    hspace="10" vspace="10">](/README/LandingPage.jpeg)
+[<img src="/README/FirstQuestionPage.jpeg" align="center"
+width="100"
+    hspace="10" vspace="10">](/README/LandingPage.jpeg)
+    
+[<img src="/README/LastQuestionPage.jpeg" align="center"
+width="100"
+    hspace="10" vspace="10">](/README/LandingPage.jpeg)
+[<img src="/README/ResultPage.jpeg" align="center"
+width="100"
+    hspace="10" vspace="10">](/README/LandingPage.jpeg)
+
 ## Build requirement
 
 ## Running sample app
@@ -31,6 +45,8 @@ For contributions via GitHub, see the [GitHub Contribution Guide](CONTRIBUTING.m
 * Fixing spelling errors
 * Adding new tests to the area that is not currently covered by tests
 * New features
+* Add or improve question and answer
+* Code logic to improve time complexity and/or dynamic capabilities
 
 ## Right to the project
 

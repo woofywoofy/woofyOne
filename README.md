@@ -38,7 +38,7 @@ Initial constributors: Chu Cheng Li, Jiahui Li, Oscar Galvez, Zhiren Zheng, have
 
 ### Using the project
 
-This Project is strictly to be use for non-commercial purpose!
+This Project is strictly to be use for non-commercial purpose only. No Exception!
 
 If you would like to use the project, please contact code owner via [Email](mailto:woofnumberone@gmail.com).
 

@@ -1,5 +1,7 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: This class to memorize the selections of the user with radio button ID
+ */
 import java.util.ArrayList;
 import java.util.Random;
 

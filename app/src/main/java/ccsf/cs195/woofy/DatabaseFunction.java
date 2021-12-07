@@ -1,5 +1,9 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: This class is to establish a API and define function between java and sqlite database
+ */
+/* 11/9/2021 - Modified getDatabase to getAllDatabase, sql query to pull all rows
+ */
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -11,14 +15,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-/* 11/9/2021 - Modified getDatabase to getAllDatabase, sql query to pull all rows
- */
-
 public class DatabaseFunction {
 
+    //Path to local sqlite database
     private static String dbpath = "/data/data/ccsf.cs195.woofy/databases/woofy.db";
     private SQLiteDatabase db;
 
+    //Establish database connection with SQLiteDatabase's openOrCreateDatabase() API
     public void openDatabase() {
         db = SQLiteDatabase.openOrCreateDatabase(dbpath, null);
     }
@@ -27,6 +30,7 @@ public class DatabaseFunction {
         db.close();
     }
 
+    //Method to initial new database if database need to be updated
     public static void initDatabase(Context context) {
         File folder = new File(context.getFilesDir().getParent(), "databases");
         File databaseFile = new File(folder, "woofy.db");
@@ -58,7 +62,7 @@ public class DatabaseFunction {
         }
     }
 
-
+    //Return row count of the current database
     public ArrayList<String> getDatabaseCount(String tableName) {
         openDatabase();
         ArrayList<String> tempString = new ArrayList<>();
@@ -97,6 +101,7 @@ public class DatabaseFunction {
         return tempString;
     }
 
+    //Get selective data from database with sqlite query as parameter
     public ArrayList<ArrayList> getDatabase(String sqlCommand) {
         openDatabase();
         ArrayList<ArrayList> tempString = new ArrayList<>();
@@ -115,6 +120,7 @@ public class DatabaseFunction {
         return tempString;
     }
 
+    //Get selective data from database with self generated query with given parameter
     public ArrayList<String> getDatabase(String tableName,String searchKey, Object number) {
         openDatabase();
         ArrayList<String> tempString = new ArrayList<>();

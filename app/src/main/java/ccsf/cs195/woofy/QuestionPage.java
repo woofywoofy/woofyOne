@@ -1,5 +1,7 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: This class is the backend of the question page, that allow user to answer the survey
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -38,6 +40,8 @@ public class QuestionPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DatabaseFunction.initDatabase(this);
         setContentView(R.layout.activity_question_page);
+
+        //Covert Views into java object
         txtQuestion = (TextView) findViewById(R.id.textQuestion);
         questionCounter = (TextView) findViewById(R.id.runningPicks);
         radioButtonGroup = (RadioGroup) findViewById(R.id.radioButtonGroup);
@@ -46,11 +50,13 @@ public class QuestionPage extends AppCompatActivity {
         radioButtons[2] = (RadioButton) findViewById(R.id.radio_three);
         radioButtons[3] = (RadioButton) findViewById(R.id.radio_four);
         nextActivityButton = (Button)findViewById(R.id.next_button);
-
-        totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));
+        totalQuestion = Integer.valueOf(linkDatabase.getDatabaseCount(questionTable).get(0));   //Calculate total question in current database
         questionCounter.setText(getString(R.string.question_counter, currentQuestion, totalQuestion));
+
+        //Initial disabled invisible previous button
         previousBT = (Button) findViewById(R.id.previous_button);
         previousBT.setTextColor(Color.WHITE);
+        previousBT.setEnabled(false);
 
         updateText();
     }
@@ -61,36 +67,45 @@ public class QuestionPage extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    //Backend logic for the next button on question page
     public void nextButton(View view) {
 
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
 
-
-        //
+        //Last question logic of question page
         if(currentQuestion == totalQuestion) {
-            if (radioButtonID <= 0) {
-                Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
-            } else if (radioButtonID > 0) {
-                saveAnswer(searchData());
 
+            //Warning if button is pressed with no answer was selected
+            if (radioButtonID <= 0) {
+                Toast.makeText(getApplicationContext(),
+                        "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
+            } else if (radioButtonID > 0) { //Next button logic if answer was
+
+                saveAnswer(searchData());   //Add answer to arraylist
+
+                //To result page as last question is answered
                 Intent intent = new Intent(QuestionPage.this, ResultPage.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
-        } else if(currentQuestion < totalQuestion){
+        } else if(currentQuestion < totalQuestion){ //Questions before last question logic
 
             if (radioButtonID <= 0) {
-                Toast.makeText(getApplicationContext(), "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "Please select a response prior to moving on!", Toast.LENGTH_SHORT).show();
             } else if (radioButtonID > 0 && currentQuestion < totalQuestion) {
                 saveAnswer(searchData());
+
+                //Track current question count
                 currentQuestion++;
 
+                //Change next button text if the next question is last question
                 if (currentQuestion == totalQuestion) {
                     nextActivityButton.setText("Go Fetch");
                 }
-
                 updateText();
 
+                //Memorize answered questions answer with userData object
                 if (currentQuestion > currentUser.buttonSize()) {
                     currentUser.add(radioButtonID);
                 } else {
@@ -121,29 +136,39 @@ public class QuestionPage extends AppCompatActivity {
                     radioButtonGroup.jumpDrawablesToCurrentState();
                 }
             }
+
+            //Enable previous button, visible after the first question
             if (currentQuestion > 1) {
                 previousBT.setTextColor(Color.parseColor("#589dfc"));
+                previousBT.setEnabled(true);
             }
         }
     }
 
-
+    //Previous button backend
     public void previousButton(View view) {
+
+        //Warning if the previous being click in first question page
         if (currentQuestion == 1) {
-            Toast.makeText(getApplicationContext(), "You're already at the beginning!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                    "You're already at the beginning!", Toast.LENGTH_SHORT).show();
         } else {
 
+            //If at last question page, next button text set back to next when previous is clicked
             if (currentQuestion == totalQuestion) {
                 nextActivityButton.setText("Next");
             }
 
             currentQuestion--;
 
+            //Disable previous button is first page
             if (currentQuestion == 1) {
                 previousBT.setTextColor(Color.WHITE);
+                previousBT.setEnabled(false);
             }
 
 
+            //Reselected answered question from userData object
             switch (currentUser.get(currentQuestion - 1)) {
                 case R.id.radio_one:
                     radioButtons[0].setChecked(true);
@@ -167,15 +192,21 @@ public class QuestionPage extends AppCompatActivity {
         }
     }
 
+    //Update view text, and return question and answer from database by question tracker number
     public void updateText() {
+
+        //Get question and answers from  database by using currentQuestion as question tracker
         databaseReturn = linkDatabase.getDatabase(questionTable, "Number", currentQuestion);
-        txtQuestion.setText(databaseReturn.get(1));
-        questionCounter.setText(getString(R.string.question_counter, currentQuestion, totalQuestion));
+        txtQuestion.setText(databaseReturn.get(1));     //Update question text view
+        questionCounter.setText(getString(R.string.question_counter, currentQuestion, totalQuestion));      //Question tracker display in question page
+
+        //Update answer radioButtons
         for (int i = 0; i < radioButtons.length; i++) {
             radioButtons[i].setText(databaseReturn.get(i + 2));
         }
     }
 
+    //Method to save all answered question's actual value into a arraylist
     public void saveAnswer(ArrayList arrayList) {
 
         if(arrayList.size() > 0) {
@@ -199,6 +230,7 @@ public class QuestionPage extends AppCompatActivity {
         }
     }
 
+    //Get answer's actual value from database
     public ArrayList searchData()
     {
         String selectAnswer = "";
@@ -212,6 +244,7 @@ public class QuestionPage extends AppCompatActivity {
 
     }
 
+    //Return saved answer value arraylist
     public static ArrayList getAnswerArrayList()
     {
         return returnAnswer;

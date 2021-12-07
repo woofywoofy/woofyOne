@@ -1,5 +1,7 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: This class is the backend of the result page, that display the final result
+ */
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -29,21 +31,20 @@ public class ResultPage extends AppCompatActivity {
     private DatabaseFunction linkDatabase = new DatabaseFunction();
     private ArrayList<String> databaseReturn;
     private int totalDog;
-    private ImageView dogImage1;
-    private TextView dogTextView1;
-    private TextView matchPercentView;
     private List<Pair<ArrayList,Integer>> sortedList= new ArrayList<>();
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_page);
-        totalDog = Integer.valueOf(linkDatabase.getDatabaseCount(dogTable).get(0));
-        ArrayList selectdog = QuestionPage.getAnswerArrayList();
+        totalDog = Integer.valueOf(     //Calculate number of dogs in database
+                linkDatabase.getDatabaseCount(dogTable).get(0));
+        ArrayList selectdog =        //return all answer value from the user's selections
+                QuestionPage.getAnswerArrayList();
         ArrayList<ArrayList> returnData;
 
+        //Fetch matching data from database with user input
         returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
                 "size <= " +selectdog.get(0) +
                 " AND Children >= " + selectdog.get(1)+
@@ -53,6 +54,7 @@ public class ResultPage extends AppCompatActivity {
                 " AND AmountOfMotion <= " + selectdog.get(5)+
                 " AND WoofLevel <= " + selectdog.get(6));
 
+        //Re-fetch with less operand if the return data from previous fetch is less than 5
         if(returnData.size() < 5)
         {
             returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
@@ -63,6 +65,17 @@ public class ResultPage extends AppCompatActivity {
                     " AND WoofLevel <= " + selectdog.get(6));
         }
 
+        //Re-fetch with less operand if the return data from previous fetch is less than 5
+        if(returnData.size() < 5)
+        {
+            returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
+                    "size <= " + selectdog.get(0) +
+                    " AND Children >= " + selectdog.get(1)+
+                    " AND ShedLevel <= " + selectdog.get(2)+
+                    " AND WoofLevel <= " + selectdog.get(6));
+        }
+
+        //Re-fetch with less operand if the return data from previous fetch is less than 5
         if(returnData.size() < 5)
         {
             returnData = linkDatabase.getDatabase("SELECT * FROM DogTable WHERE " +
@@ -73,6 +86,7 @@ public class ResultPage extends AppCompatActivity {
         }
         System.out.println("Total returned data" + returnData.size());
 
+        //Calculate match percentage between user input data and the dog's data
         for(int i = 0; i < returnData.size(); i++) {
             double matchPercent = 0;
             databaseReturn = returnData.get(i);
@@ -100,6 +114,7 @@ public class ResultPage extends AppCompatActivity {
             matchPercent = matchPercent/countElements;
             int roundedPercent = (int) Math.round(matchPercent);
 
+            //Sort all data from less match to most match
             if(sortedList == null || sortedList.isEmpty()) {
                 sortedList.add(Pair.create(databaseReturn,roundedPercent));
             } else {
@@ -116,6 +131,7 @@ public class ResultPage extends AppCompatActivity {
         }
         System.out.println("Total data in sortedList" + sortedList.size());
 
+        //Floating button that allows user to go back to the beginning of the app
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +140,9 @@ public class ResultPage extends AppCompatActivity {
             }
         });
 
-        LinearLayout contentView = findViewById(R.id.content);
+        LinearLayout contentView = findViewById(R.id.content); //Designated view to dispay result
+
+        //Limiting the final result page to only display 10 or less dogs
         int count = 10;
         if (sortedList.size() < 10)
         if(sortedList.size() < 10) {
@@ -141,16 +159,18 @@ public class ResultPage extends AppCompatActivity {
     }
 
 
+    //Back to beginning of the app
     public void backToMain(View view) {
         Intent intent = new Intent(ResultPage.this,LandingPage.class);
         startActivity(intent);
     }
 
+    //Backend logic to generate the result page with final result
     public void contentGenerator(int numberOfElement, LinearLayout contentView){
         for (int i = 1; i <= numberOfElement; i++) {
 
+            //Creating new image view that display the dog's picture
             ImageView im = new ImageView(this);
-
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     android.view.ViewGroup.LayoutParams
                             .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -158,9 +178,9 @@ public class ResultPage extends AppCompatActivity {
             lp.gravity = Gravity.CENTER_HORIZONTAL;
             im.setClickable(true);
             im.setFocusable(true);
-
-            String newUri = (String) sortedList.get(sortedList.size()-i).first.get(10);
-            im.setOnClickListener(new View.OnClickListener(){
+            String newUri = (String) sortedList.get(     //casting url data into string
+                    sortedList.size()-i).first.get(10);
+            im.setOnClickListener(new View.OnClickListener(){   //setting onClick functionality that open a link of the dog
                 public void onClick(View v){
                 Uri uriUrl = Uri.parse(newUri);
                 Intent WebView = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -169,8 +189,8 @@ public class ResultPage extends AppCompatActivity {
             });
             im.setLayoutParams(lp);
 
+            //Creating new textView for the name of breed
             TextView tv1 = new TextView(this);
-
             LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
                     android.view.ViewGroup.LayoutParams
                             .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -180,8 +200,8 @@ public class ResultPage extends AppCompatActivity {
             tv1.setTypeface(Typeface.DEFAULT_BOLD);
             tv1.setGravity(Gravity.CENTER);
 
+            //Creating new text view for the match percentage info
             TextView tv2 = new TextView(this);
-
             LinearLayout.LayoutParams lp3 = new LinearLayout.LayoutParams(
                     android.view.ViewGroup.LayoutParams
                             .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -191,17 +211,18 @@ public class ResultPage extends AppCompatActivity {
             tv2.setTypeface(Typeface.DEFAULT);
             tv2.setGravity(Gravity.CENTER);
 
-
-            try {
+            //Setting data into the created views
+            try {       //Setting picture to the created image view with URL
                 new ImageTask(im).execute(new URL((String) sortedList.get(sortedList.size() - i).first.get(9)));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
+            tv1.setText((String) sortedList.get(        //Setting breed name to the created textview
+                    sortedList.size() - i).first.get(0));
+            tv2.setText((sortedList.get(        //Setting match percentage to the created textview
+                    sortedList.size() - i).second) + "% match");
 
-            tv1.setText((String) sortedList.get(sortedList.size() - i).first.get(0));
-            tv2.setText(String.valueOf(sortedList
-                    .get(sortedList.size() - i).second) + "% match");
-
+            //Add created view to the designated view to display in result page
             contentView.addView(im);
             contentView.addView(tv1);
             contentView.addView(tv2);

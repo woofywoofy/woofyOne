@@ -1,5 +1,7 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: This class is the backend of landing page
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

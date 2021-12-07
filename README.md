@@ -11,17 +11,17 @@
 ## Screenshots
 
 [<img src="/README/LandingPage.jpeg" align="center"
-width="200"
+width="100"
     hspace="10" vspace="10">](/README/LandingPage.jpeg)
 [<img src="/README/FirstQuestionPage.jpeg" align="center"
-width="200"
+width="100"
     hspace="10" vspace="10">](/README/LandingPage.jpeg)
     
 [<img src="/README/LastQuestionPage.jpeg" align="center"
-width="200"
+width="100"
     hspace="10" vspace="10">](/README/LandingPage.jpeg)
 [<img src="/README/ResultPage.jpeg" align="center"
-width="200"
+width="100"
     hspace="10" vspace="10">](/README/LandingPage.jpeg)
 
 ## Build requirement

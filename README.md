@@ -26,31 +26,65 @@ width="100"
 
 ## Build requirement
 
+### Software
+
+Andriod Stuio
+
+Recommended enviroment and emulator:
+
+Java
+
+Pixel 2
+
+API 20
+
+### Steps
+
+#### Clone github repo to andriod studio:
+
+1. [Copy SSH link](https://github.com/woofywoofy/woofyOne) git@github.com:woofywoofy/woofyOne.git
+2. Open your Android Studio then go to the File > New > Project from Version Control
+3. After clicking on the Project from Version Control a pop-up screen will arise like below. In the Version control choose Git from the drop-down menu. 
+4. Then at last paste the link in the URL and choose your Directory. Click on the Clone button and you are done.
+
+#### Building project in andriod studio
+
+1. In the toolbar, select your app from the run configurations drop-down menu.
+2. From the target device drop-down menu, select the device that you want to run your app on.
+3. Click Run
+
+<p>If you don't have any devices configured, then you need to either
+<a href="/studio/run/device#connect">connect a device via USB</a> or
+<a href="/studio/run/managing-avds#createavd">create an AVD</a> to use the
+<a href="/studio/run/emulator">Android Emulator</a>.</p>
+
+<p>The above information is involked from <a href="https://www.geeksforgeeks.org/how-to-clone-android-project-from-github-in-android-studio/">geeksforgeeks.org</a> and <a href="https://developer.android.com/studio/run">android.com</a>
+
 ## Instruction of using the app
 
-###Landing page
+### Landing page
 
-*Click Begin to go to the Instruction page
+* Click Begin to go to the Instruction page
 
-###Instruction page
+### Instruction page
 
 Carefully read the given information
 
-*Click Understand to acknowledge and agree to the information, and begin the survey
+* Click Understand to acknowledge and agree to the information, and begin the survey
 
-###Question page
+### Question page
 
-*Click on the Next button after an answer is selected to go to the next question. 
+* Click on the Next button after an answer is selected to go to the next question. 
 
-*Click on the Previous button If you want to reselect the answer to a previous question.
+* Click on the Previous button If you want to reselect the answer to a previous question.
 
-*Click on the Go Fetch button on the last question to see your result.
+* Click on the Go Fetch button on the last question to see your result.
 
-###Result page
+### Result page
 
-*Click on the picture to learn more about the breed from the American Kennel Club website.
+* Click on the picture to learn more about the breed from the American Kennel Club website.
 
-*Click on the Home button at the bottom right corner of the screen to restart the survey.
+* Click on the Home button at the bottom right corner of the screen to restart the survey.
 
 
 
@@ -88,4 +122,4 @@ If you would like to use the project, please contact code owner via [Email](mail
 
 Some of the used libraries are released under different licenses.
 
-Most data, links, and pictures of the project are invoke from [American Kennel Club](https://www.akc.org).
+Most data, links, and pictures of the project are invoked from [American Kennel Club](https://www.akc.org).

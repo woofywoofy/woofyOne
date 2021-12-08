@@ -1,5 +1,7 @@
 package ccsf.cs195.woofy;
-
+/*
+Program Note: Unused Activity
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;

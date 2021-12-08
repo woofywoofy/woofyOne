@@ -32,15 +32,22 @@ Program note: Instruction page frontend
     <ScrollView
         android:id="@+id/instructio_scroll"
         android:layout_width="match_parent"
-        android:layout_height="450sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginBottom="30sp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100sp"
+        android:layout_marginBottom="40sp"
         android:layout_marginHorizontal="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/inscontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <TextView
             android:id="@+id/instruction_content"
@@ -51,38 +58,33 @@ Program note: Instruction page frontend
             android:textColor="@color/main_blue"
             android:textSize="12sp"
             android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/undertand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20sp"
+            android:layout_marginTop="40sp"
+            android:gravity="center"
+            android:text="By clicking Understand you are agreeing to all the information listed above"
+            android:textColor="@color/main_blue"
+            android:textSize="10sp"
+            android:textStyle="normal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="110sp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_margin="30sp"
+            android:background="@drawable/my_button_bg"
+            android:onClick="nextButton"
+            android:text="Understand"
+            android:textColor="@color/main_blue" />
+        </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/undertand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20sp"
-        android:layout_marginTop="30sp"
-        android:gravity="center"
-        android:text="By clicking Understand you are agreeing to all the information listed above"
-        android:textColor="@color/main_blue"
-        android:textSize="10sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructio_scroll"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="110sp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_margin="10sp"
-        android:background="@drawable/my_button_bg"
-        android:onClick="nextButton"
-        android:text="Understand"
-        android:textColor="@color/main_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/undertand"
-        app:layout_constraintVertical_bias="0.282" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

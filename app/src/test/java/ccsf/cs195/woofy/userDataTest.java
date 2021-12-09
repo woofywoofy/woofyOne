@@ -8,16 +8,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import static junit.framework.Assert.assertTrue;
 
-import android.util.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(JUnit4.class)
 public class userDataTest {
 
     userData ud = new userData();
-    ResultPage rp = new ResultPage();
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void get() {

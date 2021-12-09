@@ -4,18 +4,12 @@ Program note: This is to test if all the answer options in the question page are
  */
 
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
 import androidx.test.platform.app.InstrumentationRegistry;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
 import java.util.ArrayList;
 
 @RunWith(Parameterized.class)

@@ -31,7 +31,10 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class WoofyUITest {
 
-    @Rule
+
+    @Rule /*ActivityTestRule might show the class can not be found due to different version
+            but it will still test without failing, do not remove
+           */
     public ActivityTestRule<LandingPage> mActivityTestRule = new ActivityTestRule<>(LandingPage.class);
 
     @Test //This is an automated test function. #1

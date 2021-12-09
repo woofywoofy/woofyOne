@@ -132,6 +132,8 @@ public class ResultPage extends AppCompatActivity {
             }
         }
         System.out.println("Total data in sortedList" + sortedList.size());
+        //System.out.println(checkSize(returnData, sortedList));
+        //System.out.println(isSorted(sortedList));
 
         //Floating button that allows user to go back to the beginning of the app
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -269,4 +271,40 @@ public class ResultPage extends AppCompatActivity {
 
         return tv;
     }
+
+    //Check if all data is sorted into the sorted list
+    public boolean checkSize(ArrayList arrayList, List list) {
+
+        return arrayList.size() == list.size();
+    }
+
+    //To check if the final result is actually sorted
+    public boolean isSorted(List<Pair<ArrayList,Integer>> list) {
+
+        if(list.size() == 0) {
+            return true;
+        }
+        boolean flag = true;
+
+        for(int i = 0; i < list.size()-1; i++) {
+
+            if(list.get(i).second > list.get(i+1).second) {
+                flag = false;
+            }
+
+        }
+        if(flag == false) {
+            int checkNum = 0;
+            for(int i = 0; i > list.size()-1; i++){
+                if(list.get(i).second >= list.get(i+1).second) {
+                    checkNum = checkNum+1;
+                }
+            }
+            if(checkNum == list.size()) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
 }

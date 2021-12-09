@@ -31,7 +31,7 @@ public class DatabaseFunction {
     }
 
     //Method to initial new database if database need to be updated
-    public static void initDatabase(Context context) {
+    public void initDatabase(Context context) {
         File folder = new File(context.getFilesDir().getParent(), "databases");
         File databaseFile = new File(folder, "woofy.db");
         if (!folder.exists()) {

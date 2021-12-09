@@ -38,7 +38,7 @@ public class QuestionPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseFunction.initDatabase(this);
+        linkDatabase.initDatabase(this);
         setContentView(R.layout.activity_question_page);
 
         //Covert Views into java object

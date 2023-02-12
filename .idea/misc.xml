@@ -3,18 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Zhiren/Desktop/woo4/app/src/main/res/layout/activity_result_page.xml" value="0.182370820668693" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/drawable/butto_color_change.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/drawable/dotted.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/drawable/icon.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/my_button_bg.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/drawable/my_button_bg2.xml" value="0.13177083333333334" />
+        <entry key="app/src/main/res/drawable/outline_home_24.xml" value="0.12962962962962962" />
         <entry key="app/src/main/res/drawable/radio_button.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/ResultPage.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/activity_instruction_page.xml" value="0.2617753623188406" />
         <entry key="app/src/main/res/layout/activity_landing_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/activity_question_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_result_page.xml" value="0.2328125" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.1" />
       </map>
     </option>
   </component>

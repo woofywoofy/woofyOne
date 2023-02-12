@@ -1,5 +1,8 @@
 package ccsf.cs195.woofy;
 
+/*
+Program Note: This class is to covert a given url to a ImageView
+ */
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;

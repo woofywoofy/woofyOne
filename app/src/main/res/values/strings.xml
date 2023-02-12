@@ -1,9 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Woofy</string>
     <string name="quote">"Friendship is the hardest thing in the world to explain. It's not something you learn in school. But if you haven't learned the meaning of friendship, you really haven't learned anything.
         \n ― <b>Muhammad Ali</b></string>
     <string name="button_begin">Begin</string>
-    <string name="question_main">PLACEHOLDER FOR DATABASE PULLS</string>
-    <string name="question_counter">PLACEHOLDER FOR COUNTER</string>
+    <string name="question_main">PLACEHOLDER</string>
+    <string name="question_counter">%1$d of %2$d questions</string>
     <string name="button_previous">Previous</string>
+    <string name="selection_text">Your Best Matched Furry Besties!</string>
+    <string name="discover_more">Click on picture to learn more about the breed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="button_next">Next</string>
+
+    <string name="instru"><b>Woof woof, our dearest user,</b>
+        \n\nIf you are a first-time user, we welcome you, if you are a returning user, we are glad to have you back.
+        \n\n<b>Brief Instruction</b>
+        \n\n<b>Duration</b>
+        \n<br>You are expecting to spend less than 5 minutes finishing the survey.</br>
+        \n\n<b>Question Page</b>
+        \nyou will be given a survey with a total of seven multiple choices questions. The answers might not be an exact presentation of your true answer, please try your best to choose the closest answer.
+        \n\nClick on the Next button after an answer is selected to go to the next question.
+        \nClick on the Previous button If you want to reselect the answer to a previous question.
+        \nClick on the Go Fetch button on the last question to see your result.
+        \n\n<b>Result Page</b>
+        \nThe result page will display less than 10 dog breeds that most match you.
+        \n\nClick on the picture to learn more about the breed from the American Kennel Club website.
+        \nClick on the Home button at the bottom right corner of the screen to restart the survey.
+        \n\n<b>Privacy</b>
+        \nAll user data and input will be stored locally in the device the user is using. All the stored data and input will be deleted once the user closes the application.
+        \n\n<b>Disclaimer</b>
+        \nThis application is meant to be used in a casual and informative manner. We do not hold responsibility for any personal choices made by the user. Please be responsible when you are deciding to own a dog.
+        \n\n<b>Credit</b>
+        \nData and images of the application are invoked from the American Kennel Club website, <ulink url="https://www.akc.org/">https://www.akc.org/</ulink>.
+        \nA picture is downloaded from <ulink url="https://www.freepik.com/photos/nature">https://www.freepik.com/photos/nature</ulink> Nature photo created by master1305 - www.freepik.com
+        \n\n
+    </string>
+
 </resources>

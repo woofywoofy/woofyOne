@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ccsf.cs195.woofy">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,9 +25,11 @@
         </activity>
 
         <activity
+            android:name=".InstructionPage"
+            android:exported="true" />
+        <activity
             android:name=".QuestionPage"
             android:exported="true" />
-
         <activity
             android:name=".ResultPage"
             android:exported="true" />
